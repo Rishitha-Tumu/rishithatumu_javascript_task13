@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+		<style>
+			body 
+			{
+   				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			}
+			form	
+			{
+   				margin: auto;
+  				width: 20%;
+  				border: 3px solid black;
+  				padding: 10px;
+			}
+			.inputContainer 
+			{
+   				width: 95%;
+   				margin-bottom: 10px;
+			}
+			.Field 
+			{
+   				width: 100%;
+   				padding: 6px;
+   				text-align: left;
+   				font-size: 15px;
+   				font-weight: 500;
+			}
+			.errspan 
+			{
+       				float: right;
+        			position: relative;
+				margin-right: 6px;
+        			margin-top: -20px;
+        			z-index: 2;
+        			color: gray;
+    			}
+			.signinbox
+			{
+				background-color: skyblue;
+				text-align: center;
+				width: 100%;
+				padding: 10px
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function checkpassword(str)
+			{
+				var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{8,}$/;
+    				return re.test(str);
+			}
+			function checkForm(form)
+  			{
+    				if(form.ename.value == "") 
+				{
+      					alert("Error: E-mail cannot be blank!");
+      					form.ename.focus();
+      					return false;
+    				}
+    				re = /\S+@\S+\.\S+/;
+    				if(!re.test(form.ename.value)) 
+				{
+      					alert("Error: Please enter the valid E-mail id!");
+      					form.ename.focus();
+      					return false;
+    				}
+    				if(form.pname.value != "" ) 
+				{
+      					if(!checkpassword(form.pname.value)) 
+					{
+        					alert("The password you have entered is not valid! Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters");
+        					form.pname.focus();
+        					return false;
+      					}
+    				}
+    				return true;
+ 			 }
+		</script>
+		<form name="validation" method="post" onsubmit="return checkForm(this)">
+			<h1 style="text-align: center; background-color: skyblue;">Sign in</h1>
+			<div class="inputContainer">
+				<input class="Field" type="text" placeholder="mail@example.com" name="ename"/>
+				<span class="fa fa-envelope-o errspan"></span>
+			</div>
+			<div class="inputContainer">
+				<input class="Field" type="password" placeholder="password" name="pname"/>
+				<span class="fa fa-unlock-alt errspan"></span>
+			</div>
+			<div class="inputContainer">
+				<input type="submit" class="signinbox" value="SIGN IN">
+			</div>
+			<div class="inputContainer">
+    				<pre><span class="psw"><a href="#">Forgot password</a>			<a href="#">Register?</a></span></pre>
+  			</div>
+		</form>
+	</body>
+</html>
